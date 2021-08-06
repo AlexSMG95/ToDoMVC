@@ -1,162 +1,287 @@
 package org.bizone;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import io.qameta.allure.*;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.testng.asserts.SoftAssert;
+import org.openqa.selenium.TakesScreenshot;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class Test_case {
+
+class Test_case {
 
     WebDriver driver;
     Actions action;
-    SoftAssert softAssert;
-    @Before
-    public void setUpDriver() {
+
+    @BeforeEach
+    void setUpDriver() {
         driver = new ChromeDriver();
         action = new Actions(driver);
         System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.get("https://todomvc.com/examples/react/#/active");
+        driver.manage().window().maximize();
+        driver.get("https://todomvc.com/examples/react/");
     }
 
+    @Attachment(value = "test screenshot")
+    public byte[] attachScreenshot() {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    }
+
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to use all the letters of the English alphabet")
+    @Story(value = "Test field for input and accept")
     @Test
-    public void createTodo() {
-        driver.findElement(By.className("new-todo")).sendKeys("1", Keys.ENTER);
-        List < WebElement > label = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        softAssert = new SoftAssert();
-        softAssert.assertEquals(String.valueOf(label.size()), "1");
-        softAssert.assertEquals(label.get(0).getAttribute("textContent"), "1");
-        softAssert.assertAll();
+    void abilityToEnterTheEnglishAlphabet(){
+        addToDoInField("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz");
+        executeAssert(1,getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        executeAssert("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz",
+                        getNameWebElement("xpath","/html/body/section/div/section/ul/li/div/label"));
     }
 
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to use all the letters of the Russian alphabet")
+    @Story(value = "Test field for input and accept")
     @Test
-    public void renameTodo() {
-        driver.findElement(By.className("new-todo")).sendKeys("1", Keys.ENTER);
-        List < WebElement > label = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        action.moveToElement(label.get(0)).build().perform();
-        action.doubleClick(label.get(0)).perform();
-        action.sendKeys(Keys.BACK_SPACE).build().perform();
-        action.sendKeys("333").build().perform();
-        action.sendKeys(Keys.ENTER).build().perform();
-        label = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        softAssert = new SoftAssert();
-        softAssert.assertEquals(String.valueOf(label.size()), "1");
-        softAssert.assertEquals(label.get(0).getAttribute("textContent"), "333");
-        softAssert.assertAll();
+    void abilityToEnterTheRussianAlphabet(){
+        addToDoInField("АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя");
+        executeAssert(1,getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        executeAssert("АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя",
+                getNameWebElement("xpath","/html/body/section/div/section/ul/li/div/label"));
     }
-
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to use numbers")
+    @Story(value = "Test field for input and accept")
     @Test
-    public void deleteTaskCross() {
-        driver.findElement(By.className("new-todo")).sendKeys("1", Keys.ENTER);
-        List < WebElement > button_destroy = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/button"));
-        List < WebElement > label = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        action.moveToElement(label.get(0)).build().perform();
-        action.click(label.get(0)).perform();
-        action.moveToElement(button_destroy.get(0)).perform();
-        action.click(button_destroy.get(0)).perform();
-        label = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        softAssert = new SoftAssert();
-        softAssert.assertEquals(String.valueOf(label.size()), "0");
-        softAssert.assertAll();
+    void abilityToEnterTheNumber(){
+        addToDoInField("1234567890");
+        executeAssert(1,getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        executeAssert("1234567890",
+                getNameWebElement("xpath","/html/body/section/div/section/ul/li/div/label"));
     }
 
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to use special characters")
+    @Story(value = "Test field for input and accept")
     @Test
-    public void deleteTaskByClearName() {
-        driver.findElement(By.className("new-todo")).sendKeys("1", Keys.ENTER);
-        List < WebElement > label = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        action.moveToElement(label.get(0)).build().perform();
-        action.doubleClick(label.get(0)).perform();
-        action.sendKeys(Keys.BACK_SPACE).build().perform();
-        action.sendKeys(Keys.ENTER).build().perform();
-        label = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        softAssert = new SoftAssert();
-        softAssert.assertEquals(String.valueOf(label.size()), "0");
-        softAssert.assertAll();
+    void abilityToEnterTheSpecialCharacters(){
+        addToDoInField("≈&⟨⟩’*⁂@\\‱[],{}•‸⁁⎀⟨⟩^:,⁒©,(ɔ)©¤†‡– —°⌀\"÷⹀ ⸗…℮!ª❧.♀♂>«»‐-☞·‽¡¿<◊☞º−×#№()%‰.¶⌑±′″‴?\"“”\"\"\"\"’''\"®§;℠//℗⌑∴⁀~™_|| /");
+        executeAssert(1,getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        executeAssert("≈&⟨⟩’*⁂@\\‱[],{}•‸⁁⎀⟨⟩^:,⁒©,(ɔ)©¤†‡– —°⌀\"÷⹀ ⸗…℮!ª❧.♀♂>«»‐-☞·‽¡¿<◊☞º−×#№()%‰.¶⌑±′″‴?\"“”\"\"\"\"’''\"®§;℠//℗⌑∴⁀~™_|| /",
+                getNameWebElement("xpath","/html/body/section/div/section/ul/li/div/label"));
     }
 
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to enter 256 characters")
+    @Story(value = "Test field for input and accept")
     @Test
-    public void markTaskComplet() {
-        driver.findElement(By.className("new-todo")).sendKeys("1", Keys.ENTER);
-        List < WebElement > button_toogle = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/input"));
-        action.moveToElement(button_toogle.get(0)).build().perform();
-        action.click(button_toogle.get(0)).build().perform();
-        WebElement button_completed = driver.findElement(By.xpath("/html/body/section/div/footer/ul/li[3]/a"));
-        action.click(button_completed).build().perform();
-        List < WebElement > completed_list = driver.findElements(By.cssSelector("html body.learn-bar section.todoapp div section.main ul.todo-list li.completed div.view label"));
-        softAssert = new SoftAssert();
-        softAssert.assertEquals(String.valueOf(completed_list.size()), "1");
-        softAssert.assertAll();
+    void abilityToEnter256Characters(){
+        addToDoInField("≈&⟨⟩’*⁂@\\‱[],{}•‸⁁⎀⟨⟩^:,⁒©,(ɔ)©¤†‡– —°⌀\"÷⹀ ⸗…℮!ª❧.♀♂>«»‐-☞·‽¡¿<◊☞º−×#№()%‰.¶⌑±′″‴?\"“”\"\"\"\"’''\"®§;℠//℗⌑∴⁀~™_|| /AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя1234567890qwertyuuiop[]’’;lk");
+        executeAssert(1,getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        executeAssert("≈&⟨⟩’*⁂@\\‱[],{}•‸⁁⎀⟨⟩^:,⁒©,(ɔ)©¤†‡– —°⌀\"÷⹀ ⸗…℮!ª❧.♀♂>«»‐-☞·‽¡¿<◊☞º−×#№()%‰.¶⌑±′″‴?\"“”\"\"\"\"’''\"®§;℠//℗⌑∴⁀~™_|| /AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZzАаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя1234567890qwertyuuiop[]’’;lk",
+                getNameWebElement("xpath","/html/body/section/div/section/ul/li/div/label"));
     }
+
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to create task")
+    @Story(value = "Test field for input and accept")
     @Test
-    public void navigation() {
-        driver.findElement(By.className("new-todo")).sendKeys("1", Keys.ENTER);
-        driver.findElement(By.className("new-todo")).sendKeys("2", Keys.ENTER);
-        driver.findElement(By.className("new-todo")).sendKeys("3", Keys.ENTER);
-        List < WebElement > button_toogle = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/input"));
-        action.moveToElement(button_toogle.get(0)).build().perform();
-        action.click(button_toogle.get(0)).build().perform();
-        WebElement button_completed = driver.findElement(By.xpath("/html/body/section/div/footer/ul/li[3]/a"));
-        WebElement button_all = driver.findElement(By.xpath("/html/body/section/div/footer/ul/li[1]/a"));
-        WebElement button_active = driver.findElement(By.xpath("/html/body/section/div/footer/ul/li[2]/a"));
-        softAssert = new SoftAssert();
-
-
-        action.click(button_all).build().perform();
-        List < WebElement > active_list = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        List < WebElement > completed_list = driver.findElements(By.cssSelector("html body.learn-bar section.todoapp div section.main ul.todo-list li.completed div.view label"));
-        active_list.remove(completed_list.get(0));
-        softAssert.assertEquals(String.valueOf(active_list.size()), "2");
-        softAssert.assertEquals(String.valueOf(completed_list.size()), "1");
-        softAssert.assertEquals(String.valueOf(completed_list.size() + active_list.size()), "3");
-
-        action.click(button_active).build().perform();
-        active_list = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        completed_list = driver.findElements(By.cssSelector("html body.learn-bar section.todoapp div section.main ul.todo-list li.completed div.view label"));
-        softAssert.assertEquals(String.valueOf(active_list.size()), "2");
-        softAssert.assertEquals(String.valueOf(completed_list.size()), "0");
-        softAssert.assertEquals(String.valueOf(completed_list.size() + active_list.size()), "2");
-
-        action.click(button_completed).build().perform();
-        active_list = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        completed_list = driver.findElements(By.cssSelector("html body.learn-bar section.todoapp div section.main ul.todo-list li.completed div.view label"));
-        active_list.remove(completed_list.get(0));
-        softAssert.assertEquals(String.valueOf(active_list.size()), "0");
-        softAssert.assertEquals(String.valueOf(completed_list.size()), "1");
-        softAssert.assertEquals(String.valueOf(completed_list.size() + active_list.size()), "1");
-        softAssert.assertAll();
+    void abilityToCreateEmptyTask(){
+        addToDoInField("");
+        executeAssert(0,getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
     }
 
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to rename task")
+    @Story(value = "Test field for input and accept")
     @Test
-    public void deleteCompletedTask(){
-        driver.findElement(By.className("new-todo")).sendKeys("1", Keys.ENTER);
-        driver.findElement(By.className("new-todo")).sendKeys("2", Keys.ENTER);
-        driver.findElement(By.className("new-todo")).sendKeys("3", Keys.ENTER);
-        driver.findElement(By.className("new-todo")).sendKeys("4", Keys.ENTER);
-        driver.findElement(By.className("new-todo")).sendKeys("5", Keys.ENTER);
-        driver.findElement(By.className("new-todo")).sendKeys("6", Keys.ENTER);
-        WebElement markAllCompleted = driver.findElement(By.xpath("/html/body/section/div/section/label"));
-        action.click(markAllCompleted).build().perform();
-        WebElement button_completed = driver.findElement(By.xpath("/html/body/section/div/footer/ul/li[3]/a"));
-        action.click(button_completed).build().perform();
-        List < WebElement > completed_list = driver.findElements(By.cssSelector("html body.learn-bar section.todoapp div section.main ul.todo-list li.completed div.view label"));
-        softAssert = new SoftAssert();
-        softAssert.assertEquals(String.valueOf(completed_list.size()), "6");
-        WebElement clearCompleted = driver.findElement(By.xpath("/html/body/section/div/footer/button"));
-        action.click(clearCompleted).build().perform();
-        List < WebElement > active_list = driver.findElements(By.xpath("/html/body/section/div/section/ul/li/div/label"));
-        softAssert.assertEquals(String.valueOf(active_list.size()), "0");
-        softAssert.assertAll();
+    void renameTask(){
+        addToDoInField("Test");
+        executeAssert("Test", getNameWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        doubleClickOnElement(getWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        editNameTask("Text");
+        executeAssert("TestText", getNameWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
+
     }
-    @After
+
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to delete task click on cross")
+    @Story(value = "Test field for input and accept")
+    @Test
+    void deleteTaskClickOnCross(){
+        addToDoInField("Test");
+        executeAssert("Test", getNameWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        moveToElement(getWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        clickOnElement(getWebElement("xpath", "/html/body/section/div/section/ul/li/div/button"));
+        executeAssert(0, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+    }
+
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to delete task by deleting name")
+    @Story(value = "Test field for input and accept")
+    @Test
+    void deleteTaskByDeletingName() {
+        addToDoInField("Test");
+        executeAssert("Test", getNameWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        doubleClickOnElement(getWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        for (int lenght = 0; lenght < getNameWebElement("xpath", "/html/body/section/div/section/ul/li/div/label").length(); lenght++) {
+            action.sendKeys(Keys.BACK_SPACE).perform();
+        }
+        action.sendKeys(Keys.ENTER).perform();
+        executeAssert(0, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+    }
+
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible to mark task as completed")
+    @Story(value = "Test field for input and accept")
+    @Test
+    void markTaskAsCompleted() {
+        addToDoInField("Test");
+        addToDoInField("text");
+        executeAssert("Test", getNameWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        clickOnElement(getWebElement("xpath", "/html/body/section/div/section/ul/li/div/input"));
+        executeAssert(1, getListWebElementSize("cssSelector", "html body.learn-bar section.todoapp div section.main ul.todo-list li.completed div.view label"));
+
+    }
+
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible checking how the navigation works")
+    @Story(value = "Test field for input and accept")
+    @Test
+    void navigation() {
+        addToDoInField("Task 1");
+        addToDoInField("Task 2");
+        addToDoInField("Task 3");
+        executeAssert(3, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        clickOnElement(getWebElement("xpath", "/html/body/section/div/section/ul/li/div/input"));
+        clickOnElement(getWebElement("xpath", "/html/body/section/div/footer/ul/li[2]/a"));
+        executeAssert(2, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        clickOnElement(getWebElement("xpath", "/html/body/section/div/footer/ul/li[3]/a"));
+        executeAssert(1, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+    }
+
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible mark all completed task")
+    @Story(value = "Test field for input and accept")
+    @Test
+    void markAllTaskAsCompleted() {
+        addToDoInField("Task 1");
+        addToDoInField("Task 2");
+        addToDoInField("Task 3");
+        executeAssert(3, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        clickOnElement(getWebElement("xpath", "/html/body/section/div/section/label"));
+        executeAssert(3, getListWebElementSize("cssSelector", "html body.learn-bar section.todoapp div section.main ul.todo-list li.completed div.view label"));
+    }
+    @Epic ("TESTING FOR https://todomvc.com/examples/react/#")
+    @Feature(value = "BiZone test work")
+    @Severity(SeverityLevel.MINOR)
+    @Description("in this test, we check whether it is possible deleting all completed task")
+    @Story(value = "Test field for input and accept")
+    @Test
+    void deleteAllCopletedTask() {
+        addToDoInField("Task 1");
+        addToDoInField("Task 2");
+        addToDoInField("Task 3");
+        executeAssert(3, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        clickOnElement(getWebElement("xpath", "/html/body/section/div/section/label"));
+        executeAssert(3, getListWebElementSize("cssSelector", "html body.learn-bar section.todoapp div section.main ul.todo-list li.completed div.view label"));
+        clickOnElement(getWebElement("xpath", "/html/body/section/div/footer/button"));
+        executeAssert(0, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+    }
+
+    @Step(value = "add ToDO in field")
+    public void addToDoInField(String value){
+        driver.findElement(By.className("new-todo")).sendKeys(value, Keys.ENTER);
+    }
+    @Step(value = "Edit current name task")
+    public void editNameTask(String text){
+        action.sendKeys(text).perform();
+        action.sendKeys(Keys.ENTER).perform();
+    }
+    @Step(value = "Get name created element")
+    public String getNameWebElement(String selector, String path){
+        List<WebElement> name = null;
+        if (selector == "xpath") {
+            name = driver.findElements(By.xpath(path));
+        }
+        if (selector == "cssSelector") {
+            name = driver.findElements(By.cssSelector(path));
+        }
+        return name.get(0).getAttribute("textContent");
+    }
+    @Step(value = "Get created WebElement")
+    public WebElement getWebElement(String selector, String path){
+        List<WebElement> name = null;
+        if (selector == "xpath") {
+            name = driver.findElements(By.xpath(path));
+        }
+        if (selector == "cssSelector") {
+            name = driver.findElements(By.cssSelector(path));
+        }
+        return name.get(0);
+    }
+    @Step(value = "Get list size")
+    public int getListWebElementSize(String selector, String path){
+        List<WebElement> name = null;
+        if (selector == "xpath") {
+            name = driver.findElements(By.xpath(path));
+        }
+        if (selector == "cssSelector") {
+            name = driver.findElements(By.cssSelector(path));
+        }
+        return name.size();
+    }
+    @Step
+    public void doubleClickOnElement(WebElement element){
+        action.doubleClick(element).perform();
+    }
+    @Step
+    public void clickOnElement(WebElement element){
+        action.click(element).perform();
+    }
+    public void moveToElement(WebElement element){
+        action.moveToElement(element).perform();
+    }
+    @Step
+    public void executeAssert(String expected, String real){
+        Assertions.assertEquals(expected, real);
+        attachScreenshot();
+    }
+    @Step
+    public void executeAssert(int expected, int real){
+        Assertions.assertEquals(expected, real);
+        attachScreenshot();
+    }
+
+    @AfterEach
     public void close() {
-        driver.close();
+        if (driver != null)
+            driver.close();
     }
 }
