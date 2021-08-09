@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
 import java.util.List;
 
-class Test_case extends TestBase {
+class TestCase extends TestBase {
 
         @Epic("TESTING FOR https://todomvc.com/examples/react/#")
         @Feature(value = "BiZone test work")
