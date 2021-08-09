@@ -1,4 +1,4 @@
-package org.bizone;
+package zone.bi;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package org.bizone;
+package zone.bi;
 
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
