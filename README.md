@@ -2,7 +2,7 @@
 - Дождаться установки maven расширений и плагинов.
 - Установить google chrome.
 - Скачать и распаковать ChromDriver (https://chromedriver.storage.googleapis.com/index.html) эдентичный по версии установленного google chrome
-- В файле проекта "TestBase" изменить переменную pathDriver на путь до распакованного ChromeDriver
+- В файле проекта "TestBase" изменить переменную driverPath на путь до распакованного ChromeDriver
 - Запустить  SmokeTest
 _____________________________________________
 
