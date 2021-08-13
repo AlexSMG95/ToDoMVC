@@ -7,7 +7,6 @@ import org.openqa.selenium.Keys;
 public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible to use all the letters of the English alphabet")
     @Story(value = "Test field for input and accept")
     @Test
@@ -20,7 +19,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible to use all the letters of the Russian alphabet")
     @Story(value = "Test field for input and accept")
     @Test
@@ -33,7 +31,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible to use numbers")
     @Story(value = "Test field for input and accept")
     @Test
@@ -59,7 +56,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible to rename task")
     @Story(value = "Test field for input and accept")
     @Test
@@ -74,7 +70,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible to delete task click on cross")
     @Story(value = "Test field for input and accept")
     @Test
@@ -88,7 +83,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible to delete task by deleting name")
     @Story(value = "Test field for input and accept")
     @Test
@@ -105,7 +99,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible to mark task as completed")
     @Story(value = "Test field for input and accept")
     @Test
@@ -120,7 +113,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible checking how the navigation works")
     @Story(value = "Test field for input and accept")
     @Test
@@ -138,7 +130,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible mark all completed task")
     @Story(value = "Test field for input and accept")
     @Test
@@ -153,7 +144,6 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible deleting all completed task")
     @Story(value = "Test field for input and accept")
     @Test
