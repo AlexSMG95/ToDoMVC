@@ -35,7 +35,7 @@ public class TestBase{
     @AfterEach
     public void close() {
         if (driver != null)
-            driver.close();
+            driver.quit();
     }
     @Step(value = "add ToDO in field")
     public void addToDoInField(String value) {
