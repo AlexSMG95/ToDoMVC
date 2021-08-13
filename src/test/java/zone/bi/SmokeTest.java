@@ -8,7 +8,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible to use all the letters of the English alphabet")
-    @Story(value = "Test field for input and accept")
     @Test
     void abilityToEnterTheEnglishAlphabet() {
         addToDoInField("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz");
@@ -20,7 +19,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible to use all the letters of the Russian alphabet")
-    @Story(value = "Test field for input and accept")
     @Test
     void abilityToEnterTheRussianAlphabet() {
         addToDoInField("АаБбВвГгДдЕеЁёЖжЗзИиЙйКкЛлМмНнОоПпРрСсТтУуФфХхЦцЧчШшЩщЪъЫыЬьЭэЮюЯя");
@@ -32,7 +30,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible to use numbers")
-    @Story(value = "Test field for input and accept")
     @Test
     void abilityToEnterTheNumber() {
         addToDoInField("1234567890");
@@ -43,9 +40,7 @@ public class SmokeTest extends TestBase{
 
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
-    @Severity(SeverityLevel.MINOR)
     @Description("in this test, we check whether it is possible to use special characters")
-    @Story(value = "Test field for input and accept")
     @Test
     void abilityToEnterTheSpecialCharacters() {
         addToDoInField("≈&⟨⟩’*⁂@\\‱[],{}•‸⁁⎀⟨⟩^:,⁒©,(ɔ)©¤†‡– —°⌀\"÷⹀ ⸗…℮!ª❧.♀♂>«»‐-☞·‽¡¿<◊☞º−×#№()%‰.¶⌑±′″‴?\"“”\"\"\"\"’''\"®§;℠//℗⌑∴⁀~™_|| /");
@@ -57,7 +52,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible to rename task")
-    @Story(value = "Test field for input and accept")
     @Test
     void renameTask() {
         addToDoInField("Test");
@@ -71,7 +65,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible to delete task click on cross")
-    @Story(value = "Test field for input and accept")
     @Test
     void deleteTaskClickOnCross() {
         addToDoInField("Test");
@@ -84,7 +77,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible to delete task by deleting name")
-    @Story(value = "Test field for input and accept")
     @Test
     void deleteTaskByDeletingName() {
         addToDoInField("Test");
@@ -100,7 +92,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible to mark task as completed")
-    @Story(value = "Test field for input and accept")
     @Test
     void markTaskAsCompleted() {
         addToDoInField("Test");
@@ -114,7 +105,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible checking how the navigation works")
-    @Story(value = "Test field for input and accept")
     @Test
     void navigation() {
         addToDoInField("Task 1");
@@ -131,7 +121,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible mark all completed task")
-    @Story(value = "Test field for input and accept")
     @Test
     void markAllTaskAsCompleted() {
         addToDoInField("Task 1");
@@ -145,7 +134,6 @@ public class SmokeTest extends TestBase{
     @Epic("TESTING FOR https://todomvc.com/examples/react/#")
     @Feature(value = "BiZone test work")
     @Description("in this test, we check whether it is possible deleting all completed task")
-    @Story(value = "Test field for input and accept")
     @Test
     void deleteAllCompletedTask() {
         addToDoInField("Task 1");
