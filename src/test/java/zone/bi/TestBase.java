@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 public class TestBase{
 
-    @Attachment(value = "Failed test screenshot")
+    @Attachment(value = "test screenshot")
     public byte[] attachScreenshot() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
@@ -24,7 +24,8 @@ public class TestBase{
 
     @BeforeEach
     void setUpDriver() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\sav\\Documents\\chromedriver.exe");
+        String driverPath = "C:\\Users\\sav\\Documents\\chromedriver.exe";
+        System.setProperty("webdriver.chrome.driver", driverPath);
         driver = new ChromeDriver();
         action = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
