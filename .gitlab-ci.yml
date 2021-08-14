@@ -1,7 +1,27 @@
 image: markhobson/maven-chrome:jdk-11
 
-test:
-  stage: test
+Test:
+  stage: Test
   script:
-    - mvn install
+    - mvn clean install
+    - mvn allure:report
+  artifacts:
+    when: always
+    paths:
+      - target/allure-report
+    expire_in: 1 week
+  only:
+    - master
 
+Report:
+  stage: Report
+  only:
+    - master
+  script:
+    - mkdir public
+    - mv target/allure-report/* public
+  artifacts:
+    when: always
+    paths:
+      - public
+    expire_in: 1 week
