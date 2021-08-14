@@ -8,7 +8,7 @@ Smoke:
   artifacts:
     when: always
     paths:
-      - /*
+      - /target/site/*
     expire_in: 1 week
   only:
     - master
