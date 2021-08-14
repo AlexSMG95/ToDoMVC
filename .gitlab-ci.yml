@@ -1,6 +1,6 @@
 image: markhobson/maven-chrome:jdk-11
 
-test:
+Smoke:
   stage: test
   script:
     - mvn clean install
