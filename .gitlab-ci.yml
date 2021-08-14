@@ -1,6 +1,6 @@
 image: markhobson/maven-chrome:jdk-11
 
-Test:
+test:
   stage: Test
   script:
     - mvn clean install
@@ -13,7 +13,7 @@ Test:
   only:
     - master
 
-Report:
+report:
   stage: Report
   only:
     - master
