@@ -1,6 +1,6 @@
 stages:
-  - test
+  - SmokeTest
 
 test:
-  stage: test
-  script: echo $CI_PROJECT_DIR/
+  stage: SmokeTest
+  script: mvn install
