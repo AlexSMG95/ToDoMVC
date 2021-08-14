@@ -8,7 +8,7 @@ Smoke:
   artifacts:
     when: always
     paths:
-      - target/allure-report
+      - /*
     expire_in: 1 week
   only:
     - master
