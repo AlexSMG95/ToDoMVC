@@ -1,7 +1,7 @@
 image: markhobson/maven-chrome:jdk-11
 
 test:
-  stage: Smoke
+  stage: test
   script:
     - mvn clean install
     - mvn allure:report
