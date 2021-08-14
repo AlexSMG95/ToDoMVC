@@ -24,12 +24,13 @@ public class TestBase{
 
     @BeforeEach
     void setUpDriver() {
-        String driverPath = "C:\\Users\\sav\\Documents\\chromedriver.exe";
-        System.setProperty("webdriver.chrome.driver", driverPath);
-        driver = new ChromeDriver();
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options = new ChromeOptions();
+        options.setHeadless(true);
+        driver = new ChromeDriver(options);
+        driver.get("https://github.com/bonigarcia/webdrivermanager");
         action = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
         driver.get("https://todomvc.com/examples/react/");
     }
 
