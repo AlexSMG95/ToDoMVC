@@ -30,7 +30,6 @@ public class TestBase{
         ChromeOptions options = new ChromeOptions();
         options.setHeadless(true);
         driver = new ChromeDriver(options);
-        driver.get("https://github.com/bonigarcia/webdrivermanager");
         action = new Actions(driver);
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.get("https://todomvc.com/examples/react/");
