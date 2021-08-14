@@ -11,7 +11,7 @@ public class SmokeTest extends TestBase{
     @Test
     void abilityToEnterTheEnglishAlphabet() {
         addToDoInField("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz");
-        executeAssert(2, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
+        executeAssert(1, getListWebElementSize("xpath", "/html/body/section/div/section/ul/li/div/label"));
         executeAssert("AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz",
                 getNameWebElement("xpath", "/html/body/section/div/section/ul/li/div/label"));
     }
