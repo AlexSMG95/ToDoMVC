@@ -1,7 +1,7 @@
 image: markhobson/maven-chrome:jdk-11
 
 test:
-  stage: Test
+  stage: Smoke
   script:
     - mvn clean install
     - mvn allure:report
@@ -12,16 +12,3 @@ test:
     expire_in: 1 week
   only:
     - master
-
-report:
-  stage: Report
-  only:
-    - master
-  script:
-    - mkdir public
-    - mv target/allure-report/* public
-  artifacts:
-    when: always
-    paths:
-      - public
-    expire_in: 1 week
