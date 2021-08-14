@@ -8,7 +8,7 @@ Smoke:
   artifacts:
     when: always
     paths:
-      - /target/site/*
+      - /builds/alexsmg95/todomvc/target/site/allure-maven-plugin/*
     expire_in: 1 week
   only:
     - master
