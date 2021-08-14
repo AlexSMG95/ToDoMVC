@@ -1,5 +1,8 @@
 image: markhobson/maven-chrome:jdk-11
 
+Stages:
+  -Test
+  -Report
 Test:
   stage: Test
   script:
