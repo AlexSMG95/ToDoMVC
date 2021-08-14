@@ -3,4 +3,4 @@ stages:
 
 test:
   stage: SmokeTest
-  script: mvn install
+  script: dir
