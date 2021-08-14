@@ -3,4 +3,4 @@ stages:
 
 test:
   stage: SmokeTest
-  script: dir
+  script: java --version
