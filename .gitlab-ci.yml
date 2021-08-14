@@ -12,3 +12,16 @@ Smoke:
     expire_in: 1 week
   only:
     - master
+Report:
+  stage: deploy
+  only:
+    - master
+  script:
+    - mkdir public
+    - mv target/allure-report/* public
+    - sh .report/slack.sh ${CI_PROJECT_NAME} ${CI_JOB_ID} ${CI_PAGES_URL}
+  artifacts:
+    when: always
+    paths:
+      - public
+    expire_in: 1 week
