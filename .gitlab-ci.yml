@@ -3,7 +3,7 @@ image: markhobson/maven-chrome:jdk-11
 Smoke:
   stage: test
   script:
-    - mvn clean install
+    - mvn -Dtest=SmokeTest test
     - mvn allure:report
   artifacts:
     when: always
