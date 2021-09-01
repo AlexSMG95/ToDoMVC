@@ -1,14 +1,17 @@
-image: markhobson/maven-chrome:jdk-11
+name: Java CI
 
-Smoke:
-  stage: test
-  script:
-    - mvn -Dtest=SmokeTest test
-    - mvn allure:report
-  artifacts:
-    when: always
-    paths:
-      - /builds/alexsmg95/todomvc/target/site/allure-maven-plugin/*
-    expire_in: 1 week
-  only:
-    - master
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+      - name: Build with Maven
+        run: mvn --batch-mode --update-snapshots verify
